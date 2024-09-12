@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { Employee } from '../employee';
 
@@ -12,7 +12,9 @@ export class EmployeeEditComponent {
   id:any;
   data:any;
   employee =new Employee();
-  constructor(private route:ActivatedRoute,private dataService:DataService){
+  constructor(private route:ActivatedRoute,private dataService:DataService,
+    private router: Router
+  ){
 
   }
   ngOnInit(): void {
@@ -27,6 +29,11 @@ export class EmployeeEditComponent {
     this.dataService.getByID(this.id).subscribe(res =>{
       this.data=res;
       this.employee=this.data;
+    });
+  }
+  updateEmployee(){
+    this.dataService.updateEmployee(this.id,this.data).subscribe(res =>{
+      this.router.navigate(['/']);
     });
   }
 
