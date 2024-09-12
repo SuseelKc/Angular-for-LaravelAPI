@@ -8,6 +8,7 @@ import { Employee } from '../../employee';
   styleUrl: './employees.component.css'
 })
 export class EmployeesComponent {
+  id:any;
   employees:any;  
   employee = new Employee(); //employe object
   constructor(private dataService:DataService){
@@ -24,11 +25,15 @@ export class EmployeesComponent {
   }
 
   insertData(){
-    console.log(this.employee);
+    // console.log(this.employee);
     this.dataService.addEmployee(this.employee).subscribe(res=>{
       console.log(res);
       this.getEmployeesData();
+    }); 
+  }
+  deleteEmployee(id:any){
+    this.dataService.deleteEmployee(id).subscribe(res =>{
+      this.getEmployeesData();
     });
-    
   }
 }

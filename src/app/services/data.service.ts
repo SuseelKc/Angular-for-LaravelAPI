@@ -7,7 +7,7 @@ import { Employee } from '../employee';
   providedIn: 'root'
 })
 export class DataService {
-
+  
   constructor(private httpClient:HttpClient) {
  
    }
@@ -18,5 +18,7 @@ export class DataService {
   addEmployee(data: Employee){
     return this.httpClient.post('http://127.0.0.1:8000/api/addEmployee',data);
   }
-  
+  deleteEmployee(id: any){
+    return this.httpClient.delete('http://127.0.0.1:8000/api/deleteEmployee/'+id);
+  }
 }
